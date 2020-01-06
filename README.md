@@ -7,7 +7,7 @@ The `replace-svg-in-html-loader` finds SVG placeholders in HTML templates and re
 To begin, you'll need to install `replace-svg-in-html-loader`:
 
 ```console
-npm install --save-dev replace-svg-in-html-loader
+npm install --save-dev @kmaraz/replace-svg-in-html-loader
 ```
 
 Then add the plugin to your `webpack` config. For example:
