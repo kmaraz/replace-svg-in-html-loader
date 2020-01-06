@@ -107,7 +107,7 @@ module.exports = {
 
 ## IMPORTANT!
 
-Sorry, but rder of attributes in the icon placeholder is strict in a sense, that
+Sorry, but order of attributes in the icon placeholder is strict in a sense, that
 * `icon` must be at the end
 * `fill` is optional and must be the very last attribute after `icon`.
 
@@ -127,7 +127,7 @@ Sorry, but rder of attributes in the icon placeholder is strict in a sense, that
 <div>
   <svg icon="md-add" class="icon-size14"></svg>
   <!-- This will work, but without default fill -->
-  <svg fill icon="md-add"></svg> 
+  <svg fill icon="md-add"></svg>
   <!-- This will work, but without class -->
   <svg *ngIf="test" icon="md-add" class="icon-size14"></svg>
 </div>
