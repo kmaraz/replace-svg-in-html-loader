@@ -1,0 +1,19 @@
+{
+  "name": "@kamylko/replace-svg-in-html-loader",
+  "version": "1.0.0",
+  "description": "This loader will replace all SVG icons in HTML templates.",
+  "main": "svg.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmaraz/replace-svg-in-html-loader.git"
+  },
+  "author": "Kamil Maraz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kmaraz/replace-svg-in-html-loader/issues"
+  },
+  "homepage": "https://github.com/kmaraz/replace-svg-in-html-loader#readme"
+}
