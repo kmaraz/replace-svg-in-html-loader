@@ -128,7 +128,7 @@ Sorry, but order of attributes in the icon placeholder is strict in a sense, tha
   <svg icon="md-add" class="icon-size14"></svg>
   <!-- This will work, but without default fill -->
   <svg fill icon="md-add"></svg>
-  <!-- This will work, but without class -->
+  <!-- This will not work -->
   <svg *ngIf="test" icon="md-add" class="icon-size14"></svg>
 </div>
 ```
