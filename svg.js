@@ -11,7 +11,7 @@ module.exports = function (source) {
   const context = this.rootContext;
 
   let newSource = source.toString();
-  const firstMatch = newSource.matchAll(/<(svg[^-]([\s\w\d\"\'\!\.\-\_=*{}\[\]\$\(\);]*)icon=\"(.*)\")([\s\w]*)>[\s]*<\/svg>/g);
+  const firstMatch = newSource.matchAll(/<(svg[^-]([\s\w\d\"\'\!\.\-\_\&=*{}\[\]\$\(\);]*)icon=\"(.*)\")([\s\w]*)>[\s]*<\/svg>/g);
 
   const found = [...firstMatch];
   if (found && found.length) {
@@ -30,7 +30,7 @@ module.exports = function (source) {
         currentIcon = currentIcon.replace(/fill=".*?"/g, '')
       }
       currentIcon = currentIcon.replace(/\s\s+/g, ' ');
-      newSource = newSource.replace(/<(svg[^-]([\s\w\d\"\'\!\.\-\_=*{}\[\]\$\(\);]*)icon=\"(.*)\")([\s\w]*)>[\s]*<\/svg>/, currentIcon);
+      newSource = newSource.replace(/<(svg[^-]([\s\w\d\"\'\!\.\-\_\&=*{}\[\]\$\(\);]*)icon=\"(.*)\")([\s\w]*)>[\s]*<\/svg>/, currentIcon);
       newSource = newSource.replace('###<svg', '<svg ' + iconAttributes)
     }
     callback(null, newSource);
