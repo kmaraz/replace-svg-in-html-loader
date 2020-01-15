@@ -1,5 +1,5 @@
 {
-  "name": "@kamylko/replace-svg-in-html-loader",
+  "name": "@kmaraz/replace-svg-in-html-loader",
   "version": "1.0.0",
   "description": "This loader will replace all SVG icons in HTML templates.",
   "main": "svg.js",
