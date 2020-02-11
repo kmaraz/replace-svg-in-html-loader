@@ -1,7 +1,7 @@
 const fs = require('fs');
 const loaderUtils = require('loader-utils');
 const path = require('path');
-const regexp = /<(svg[^-]([\s\w\d\"\'\!\.\-\_=*{}\&\[\]\$\(\);]*)icon=\"(.*)\")([\s\w]*)>[\s]*<\/svg>/;
+const regexp = /<(svg[^-]([\s\w\d\"\'\!\.\-\_=*{}\&\[\]\$\(\):;,]*)icon=\"(.*)\")([\s\w]*)>[\s]*<\/svg>/;
 const regexpGlobal = new RegExp(regexp.source, `${regexp.flags}g`);
 
 module.exports = function (source) {
