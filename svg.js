@@ -3,6 +3,7 @@ const loaderUtils = require('loader-utils');
 const path = require('path');
 const regexp = /<(svg[^-]([\s\w\d\"\'\!\.\-\_=*{}\&\[\]\$\(\):;,]*)icon=\"(.*)\")([\s\w]*)>[\s]*<\/svg>/;
 const regexpGlobal = new RegExp(regexp.source, `${regexp.flags}g`);
+const iconCache = new Map();
 
 module.exports = function (source) {
   this.cacheable();
@@ -26,8 +27,13 @@ module.exports = function (source) {
       const fullPathToIcon = path.resolve(context, pathToIcon);
 
       this.addDependency(fullPathToIcon);
-      let currentIcon = fs.readFileSync(fullPathToIcon, 'utf-8')
-      currentIcon = '###' + currentIcon
+
+      let currentIcon = iconCache.get(fullPathToIcon);
+      if (!currentIcon) {
+        currentIcon = '###' + fs.readFileSync(fullPathToIcon, 'utf-8');
+        iconCache.set(fullPathToIcon, currentIcon);
+      }
+
       if (!leaveFillAttribute) {
         currentIcon = currentIcon.replace(/fill=".*?"/g, '')
       }
