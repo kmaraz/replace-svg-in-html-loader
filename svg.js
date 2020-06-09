@@ -1,10 +1,18 @@
 const fs = require('fs');
 const loaderUtils = require('loader-utils');
 const path = require('path');
-const regexp = /<(svg[^-]([\s\w\d\"\'\!\.\-\_=*{}\&\[\]\$\(\):;,|<>]*?)icon=\"(.*)\")([\s\w]*)>[\s]*<\/svg>/;
+const attributeValueRegexp = '[^"]*?';
+const htmlAttributeRegexp = `\\s*[^\\s="]+="${attributeValueRegexp}"`;
+const iconAttributeRegexp = `icon="(${attributeValueRegexp})"`;
+const regexp = new RegExp(
+  `<svg((?:${htmlAttributeRegexp})+)\\s+${iconAttributeRegexp}([\s\w]*)>[\\s]*<\\/svg>`
+);
 const regexpGlobal = new RegExp(regexp.source, `${regexp.flags}g`);
+
+/** @type {Map<string, string>} */
 const iconCache = new Map();
 
+/** @type {import('webpack').loader.Loader} */
 module.exports = function (source) {
   this.cacheable();
   const callback = this.async();
@@ -20,9 +28,9 @@ module.exports = function (source) {
   if (found && found.length) {
     for (let i = 0; i < found.length; i++) {
       const element = found[i];
-      const iconName = element[3];
-      const iconAttributes = element[2];
-      const leaveFillAttribute = element[4].includes('fill');
+      const iconName = element[2];
+      const iconAttributes = element[1];
+      const leaveFillAttribute = (element[3] || '').includes('fill');
       const pathToIcon = loaderUtils.urlToRequest(optionsIconPath + iconName + '.svg');
       const fullPathToIcon = path.resolve(context, pathToIcon);
 
@@ -39,7 +47,7 @@ module.exports = function (source) {
       }
       currentIcon = currentIcon.replace(/\s\s+/g, ' ');
       newSource = newSource.replace(regexp, currentIcon);
-      newSource = newSource.replace('###<svg', '<svg ' + iconAttributes)
+      newSource = newSource.replace('###<svg', '<svg ' + iconAttributes.trim())
     }
     callback(null, newSource);
   }
