@@ -5,7 +5,7 @@ const attributeValueRegexp = '[^"]*?';
 const htmlAttributeRegexp = `\\s*[^\\s="]+="${attributeValueRegexp}"`;
 const iconAttributeRegexp = `icon="(${attributeValueRegexp})"`;
 const regexp = new RegExp(
-  `<svg((?:${htmlAttributeRegexp})+)\\s+${iconAttributeRegexp}([\s\w]*)>[\\s]*<\\/svg>`
+  `<svg\\s*((?:${htmlAttributeRegexp})*)\\s+${iconAttributeRegexp}\\s*([\\s\\w]*)>[\\s]*<\\/svg>`
 );
 const regexpGlobal = new RegExp(regexp.source, `${regexp.flags}g`);
 
@@ -47,7 +47,7 @@ module.exports = function (source) {
       }
       currentIcon = currentIcon.replace(/\s\s+/g, ' ');
       newSource = newSource.replace(regexp, currentIcon);
-      newSource = newSource.replace('###<svg', '<svg ' + iconAttributes.trim())
+      newSource = newSource.replace('###<svg', '<svg ' + iconAttributes);
     }
     callback(null, newSource);
   }
